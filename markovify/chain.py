@@ -74,13 +74,22 @@ class Chain(object):
     def precompute_begin_state(self):
         """
         Caches the summation calculation and available choices for BEGIN * state_size.
-        Significantly speeds up chain generation on large corpora. Thanks, @schollz!
+        Significantly speeds up chain generation on large corpuses. Thanks, @schollz!
         """
         begin_state = tuple([ BEGIN ] * self.state_size)
         choices, weights = zip(*self.model[begin_state].items())
         cumdist = list(accumulate(weights))
         self.begin_cumdist = cumdist
         self.begin_choices = choices
+    
+    # M: iterate through model dict. if state[0] (user input str), return tuple
+    def find_state(self, state):
+        """
+        """
+        for key in self.model:
+            # if (state[0] in key) == True:
+            if (state[0] in key):
+                return key
 
     def move(self, state):
         """
@@ -102,7 +111,11 @@ class Chain(object):
         (as a tuple), return a generator that will yield successive items
         until the chain reaches the END state.
         """
-        state = init_state or (BEGIN,) * self.state_size
+        # M: original
+        # state = init_state or (BEGIN,) * self.state_size
+        # M: mine
+        state = self.find_state(init_state)
+
         while True:
             next_word = self.move(state)
             if next_word == END: break
