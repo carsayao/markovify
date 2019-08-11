@@ -121,6 +121,8 @@ class Chain(object):
         # Dictionary to hold states with possible matches
         closest = {}
         word = state[0]
+        # TODO: add to init_state[1] to try next word. for example, if "guy" is the input, the lev distance is 0 but doesn't produces a sentence in make_sentence, we want to try another.
+        # levmin = state[1]
         for key in self.model:
             for k in key:
                 lev = self.levenshtein(word, k)

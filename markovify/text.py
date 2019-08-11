@@ -27,8 +27,6 @@ class Text(object):
               an infinite process, you can come very close by passing just one, very
               long run.
         retain_original: Indicates whether to keep the original corpus.
-        well_formed: Indicates whether sentences should be well-formed, preventing
-              unmatched quotes, parenthesis by default, or a custom regular expression
               can be provided.
         reject_reg: If well_formed is True, this can be provided to override the
               standard rejection pattern.
@@ -202,12 +200,23 @@ class Text(object):
                     return self.word_join(words)
             else:
                 return self.word_join(words)
+        # M: TODO 
+        # if we didn't find a match, try the next possible case
+        # for i in range(tries):
+        #     words = prefix + self.chain.walk((init_state[0], i)
+        #     if max_words != None and len(words) > max_words:
+        #         continue
+        #     if test_output and hasattr(self, "rejoined_text"):
+        #         if self.test_sentence_output(words, mor, mot):
+        #             return self.word_join(words)
+        #     else:
+        #         return self.word_join(words)
         return None
 
     def make_short_sentence(self, max_chars, min_chars=0, **kwargs):
         """
         Tries making a sentence of no more than `max_chars` characters and optionally
-        no less than `min_chars` characters, passing **kwargs to `self.make_sentence`.
+        no less than `min_chars` charcaters, passing **kwargs to `self.make_sentence`.
         """
         tries = kwargs.get('tries', DEFAULT_TRIES)
 
