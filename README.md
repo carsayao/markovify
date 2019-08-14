@@ -1,5 +1,8 @@
 [![Version](https://img.shields.io/pypi/v/markovify.svg)](https://pypi.python.org/pypi/markovify) [![Build status](https://travis-ci.org/jsvine/markovify.png)](https://travis-ci.org/jsvine/markovify) [![Code coverage](https://img.shields.io/coveralls/jsvine/markovify.svg)](https://coveralls.io/github/jsvine/markovify) [![Support Python versions](https://img.shields.io/pypi/pyversions/markovify.svg)](https://pypi.python.org/pypi/markovify)
 
+# *carsayao forked Markovify*
+- Added fuzzy string search, via Levenshtein, to chain.py.
+- Edited find_state() in chain.py to accept an init_state where the first item in the tuple is a hopeful seed. Together with the Levenshtein function, this is more likely to seed. (I kind of didn't realize make_sentence_with_start() already had this functionality, minus fuzzy string matching, until I really dug into the lib code ¯\\_(ツ)_/¯.)
 
 # Markovify
 
